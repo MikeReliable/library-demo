@@ -15,9 +15,8 @@ public class PublisherController {
     private final PublisherService publisherService;
 
     @GetMapping("/{publisherId}")
-    public ResponseEntity<PublisherDto> getPublisher(@PathVariable Long publisherId,
-                                                     @RequestBody PublisherDto publisherDto) {
-        return new ResponseEntity<>(publisherService.getPublisher(publisherId, publisherDto), HttpStatus.OK);
+    public ResponseEntity<PublisherDto> getPublisher(@PathVariable Long publisherId) {
+        return new ResponseEntity<>(publisherService.getPublisher(publisherId), HttpStatus.OK);
     }
 
     @PostMapping

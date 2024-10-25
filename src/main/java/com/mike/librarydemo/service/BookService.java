@@ -4,7 +4,7 @@ import com.mike.librarydemo.dto.BookDto;
 
 public interface BookService {
 
-    BookDto getBook(Long bookId, BookDto bookDto);
+    BookDto getBook(Long bookId);
 
     BookDto createBook(BookDto bookDto);
 

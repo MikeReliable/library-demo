@@ -15,27 +15,26 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @GetMapping("/{authorId}")
-    public ResponseEntity<AuthorDto> getPublisher(@PathVariable Long authorId,
-                                                  @RequestBody AuthorDto authorDto) {
-        return new ResponseEntity<>(authorService.getPublisher(authorId, authorDto), HttpStatus.OK);
+    public ResponseEntity<AuthorDto> getAuthor(@PathVariable Long authorId                                                  ) {
+        return new ResponseEntity<>(authorService.getAuthor(authorId), HttpStatus.OK);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<AuthorDto> createPublisher(@RequestBody AuthorDto authorDto) {
-        return new ResponseEntity<>(authorService.createPublisher(authorDto), HttpStatus.CREATED);
+    public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorDto authorDto) {
+        return new ResponseEntity<>(authorService.createAuthor(authorDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{authorId}")
-    public ResponseEntity<AuthorDto> updatePublisher(@PathVariable Long authorId,
+    public ResponseEntity<AuthorDto> updateAuthor(@PathVariable Long authorId,
                                                      @RequestBody AuthorDto authorDto) {
-        return new ResponseEntity<>(authorService.updatePublisher(authorId, authorDto), HttpStatus.OK);
+        return new ResponseEntity<>(authorService.updateAuthor(authorId, authorDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{authorId}")
-    public ResponseEntity<String> deletePublisher(@PathVariable Long authorId,
+    public ResponseEntity<String> deleteAuthor(@PathVariable Long authorId,
                                                   @RequestBody AuthorDto authorDto) {
-        authorService.deletePublisher(authorId, authorDto);
-        return new ResponseEntity<>("Publisher deleted", HttpStatus.OK);
+        authorService.deleteAuthor(authorId, authorDto);
+        return new ResponseEntity<>("Author deleted", HttpStatus.OK);
     }
 }

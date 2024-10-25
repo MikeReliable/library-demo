@@ -4,7 +4,7 @@ import com.mike.librarydemo.dto.PublisherDto;
 
 public interface PublisherService {
 
-    PublisherDto getPublisher(Long publisherId, PublisherDto publisherDto);
+    PublisherDto getPublisher(Long publisherId);
 
     PublisherDto createPublisher(PublisherDto publisherDto);
 
