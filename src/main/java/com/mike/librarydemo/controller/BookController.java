@@ -1,6 +1,7 @@
 package com.mike.librarydemo.controller;
 
 import com.mike.librarydemo.dto.BookDto;
+import com.mike.librarydemo.dto.BookCreateDto;
 import com.mike.librarydemo.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/book")
+@RequestMapping("/books")
 public class BookController {
 
     private final BookService bookService;
@@ -21,14 +22,14 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
-        return new ResponseEntity<>(bookService.createBook(bookDto), HttpStatus.CREATED);
+    public ResponseEntity<BookCreateDto> createBook(@RequestBody BookCreateDto bookCreateDto) {
+        return new ResponseEntity<>(bookService.createBook(bookCreateDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{bookId}")
-    public ResponseEntity<BookDto> updateBook(@PathVariable Long bookId,
-                                              @RequestBody BookDto bookDto) {
-        return new ResponseEntity<>(bookService.updateBook(bookId, bookDto), HttpStatus.OK);
+    public ResponseEntity<BookCreateDto> updateBook(@PathVariable Long bookId,
+                                              @RequestBody BookCreateDto bookCreateDto) {
+        return new ResponseEntity<>(bookService.updateBook(bookId, bookCreateDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/{bookId}")
