@@ -53,7 +53,7 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public void deletePublisher(Long publisherId, PublisherDto publisherDto) {
+    public void deletePublisher(Long publisherId) {
         Publisher publisher = publisherRepo.findById(publisherId).orElseThrow(() ->
                 new EntityNotFoundException(String.format("Publisher with Id %s not found", publisherId)));
         if(publisher.getBooks().isEmpty()){

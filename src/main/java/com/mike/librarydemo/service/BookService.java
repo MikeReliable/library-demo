@@ -12,7 +12,7 @@ public interface BookService {
 
     BookCreateDto updateBook(Long bookId, BookCreateDto bookCreateDto);
 
-    void deleteBook(Long bookId, BookDto bookDto);
+    void deleteBook(Long bookId);
 
     BookDtoList getAllBooksByPublisher(Long publisherId, int pageNo, int pageSize, int year);
 

@@ -52,7 +52,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void deleteAuthor(Long authorId, AuthorDto authorDto) {
+    public void deleteAuthor(Long authorId) {
         Author author = authorRepo.findById(authorId).orElseThrow(() ->
                 new EntityNotFoundException(String.format("Author with Id %s not found", authorId)));
        if(author.getBooks().isEmpty()){
