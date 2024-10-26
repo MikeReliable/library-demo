@@ -3,6 +3,7 @@ package com.mike.librarydemo.service.impl;
 import com.mike.librarydemo.dto.AuthorDto;
 import com.mike.librarydemo.dto.BookCreateDto;
 import com.mike.librarydemo.dto.BookDto;
+import com.mike.librarydemo.dto.BookDtoList;
 import com.mike.librarydemo.entity.Author;
 import com.mike.librarydemo.entity.Book;
 import com.mike.librarydemo.entity.Publisher;
@@ -14,10 +15,16 @@ import com.mike.librarydemo.service.BookService;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -119,5 +126,45 @@ public class BookServiceImpl implements BookService {
         book.setPublisher(null);
         book.setAuthors(null);
         bookRepo.delete(book);
+    }
+
+    @Override
+    public BookDtoList getAllBooksByPublisher(Long publisherId, int pageNo, int pageSize, int year) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Publisher publisher = publisherRepo.findById(publisherId).orElseThrow(() ->
+                new EntityNotFoundException(String.format("Publisher with Id %s not found", publisherId)));
+        Page<Book> books = bookRepo.findAllByPublisher(publisher, pageable);
+        return getBookDtoList(pageNo, year, books);
+    }
+
+    @Override
+    public BookDtoList getAllBooksByAuthor(Long authorId, int pageNo, int pageSize, int year) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Set<Author> authors = new HashSet<>();
+        Author author = authorRepo.findById(authorId).orElseThrow(() ->
+                new EntityNotFoundException(String.format("Author with Id %s not found", authorId)));
+        authors.add(author);
+        Page<Book> books = bookRepo.findAllByAuthors(authors, pageable);
+        return getBookDtoList(pageNo, year, books);
+    }
+
+    private BookDtoList getBookDtoList(int pageNo, int year, Page<Book> books) {
+        List<Book> bookList = books.getContent();
+        if (year != 0) {
+            bookList = bookList.stream().filter(b -> b.getYear() == year).collect(Collectors.toList());
+        }
+        List<BookDto> bookDtoList = new ArrayList<>();
+        for (Book book : bookList) {
+            BookDto bookDto = mapper.toBookDto(book);
+            bookDtoList.add(bookDto);
+        }
+        return BookDtoList.builder()
+                .bookDtoList(bookDtoList)
+                .pageNo(pageNo)
+                .pageSize(books.getSize())
+                .totalElements(books.getTotalElements())
+                .totalPages(books.getTotalPages())
+                .last(books.isLast())
+                .build();
     }
 }

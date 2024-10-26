@@ -1,7 +1,8 @@
 package com.mike.librarydemo.controller;
 
-import com.mike.librarydemo.dto.BookDto;
 import com.mike.librarydemo.dto.BookCreateDto;
+import com.mike.librarydemo.dto.BookDto;
+import com.mike.librarydemo.dto.BookDtoList;
 import com.mike.librarydemo.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class BookController {
 
     @PutMapping("/{bookId}")
     public ResponseEntity<BookCreateDto> updateBook(@PathVariable Long bookId,
-                                              @RequestBody BookCreateDto bookCreateDto) {
+                                                    @RequestBody BookCreateDto bookCreateDto) {
         return new ResponseEntity<>(bookService.updateBook(bookId, bookCreateDto), HttpStatus.OK);
     }
 
@@ -38,4 +39,21 @@ public class BookController {
         bookService.deleteBook(bookId, bookDto);
         return new ResponseEntity<>("Book deleted", HttpStatus.OK);
     }
+
+    @GetMapping("/publishers/{publisherId}")
+    public ResponseEntity<BookDtoList> getAllBooksByPublisher(@PathVariable Long publisherId,
+                                                              @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                                                              @RequestParam(value = "pageSize", defaultValue = "2", required = false) int pageSize,
+                                                              @RequestParam(value = "year", defaultValue = "0", required = false) int year) {
+        return new ResponseEntity<>(bookService.getAllBooksByPublisher(publisherId, pageNo, pageSize, year), HttpStatus.OK);
+    }
+
+    @GetMapping("/authors/{authorId}")
+    public ResponseEntity<BookDtoList> getAllBooksByAuthor(@PathVariable Long authorId,
+                                                           @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+                                                           @RequestParam(value = "pageSize", defaultValue = "2", required = false) int pageSize,
+                                                           @RequestParam(value = "year", required = false) int year) {
+        return new ResponseEntity<>(bookService.getAllBooksByAuthor(authorId, pageNo, pageSize, year), HttpStatus.OK);
+    }
+
 }

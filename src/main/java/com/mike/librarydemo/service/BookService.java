@@ -1,7 +1,8 @@
 package com.mike.librarydemo.service;
 
-import com.mike.librarydemo.dto.BookDto;
 import com.mike.librarydemo.dto.BookCreateDto;
+import com.mike.librarydemo.dto.BookDto;
+import com.mike.librarydemo.dto.BookDtoList;
 
 public interface BookService {
 
@@ -12,4 +13,8 @@ public interface BookService {
     BookCreateDto updateBook(Long bookId, BookCreateDto bookCreateDto);
 
     void deleteBook(Long bookId, BookDto bookDto);
+
+    BookDtoList getAllBooksByPublisher(Long publisherId, int pageNo, int pageSize, int year);
+
+    BookDtoList getAllBooksByAuthor(Long authorId, int pageNo, int pageSize, int year);
 }

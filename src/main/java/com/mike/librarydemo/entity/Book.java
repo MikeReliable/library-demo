@@ -42,4 +42,9 @@ public class Book {
         Book book = (Book) o;
         return Objects.equals(title, book.title);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title);
+    }
 }
