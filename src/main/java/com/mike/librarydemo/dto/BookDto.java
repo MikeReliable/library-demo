@@ -1,5 +1,6 @@
 package com.mike.librarydemo.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -10,6 +11,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Book input/output data")
 public class BookDto {
 
     @NotBlank(message = "Field title cannot be empty")

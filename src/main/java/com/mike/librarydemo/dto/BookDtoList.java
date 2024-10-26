@@ -1,5 +1,6 @@
 package com.mike.librarydemo.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "All books output data")
 public class BookDtoList {
 
     private List<BookDto> bookDtoList;

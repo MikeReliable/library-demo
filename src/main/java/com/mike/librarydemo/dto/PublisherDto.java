@@ -1,5 +1,6 @@
 package com.mike.librarydemo.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -9,6 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Publisher input/output data")
 public class PublisherDto {
 
     @NotBlank(message = "Field country cannot be empty")

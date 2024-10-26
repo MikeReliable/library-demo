@@ -1,5 +1,6 @@
 package com.mike.librarydemo.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -9,6 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Author input/output data")
 public class AuthorDto {
 
     @NotBlank(message = "Field lastName cannot be empty")
