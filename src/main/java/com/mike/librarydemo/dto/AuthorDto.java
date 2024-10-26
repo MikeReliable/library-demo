@@ -13,11 +13,11 @@ import lombok.*;
 @Schema(description = "Author input/output data")
 public class AuthorDto {
 
-    @NotBlank(message = "Field lastName cannot be empty")
+    @NotBlank(message = "Field lastname cannot be empty")
     @Size(min = 3, max = 20, message = "LastName length must be from 3 to 20 characters")
     private String lastName;
     private String middleName;
-    @NotBlank(message = "Field firstName cannot be empty")
+    @NotBlank(message = "Field firstname cannot be empty")
     @Size(min = 3, max = 20, message = "FirstName length must be from 3 to 20 characters")
     private String firstName;
 }

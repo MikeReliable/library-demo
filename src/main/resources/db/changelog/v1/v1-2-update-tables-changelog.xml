@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="v1-2-1" author="Mike">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="tasks"/>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="publisher"
+                                 baseTableName="book"
+                                 constraintName="publisher"
+                                 referencedColumnNames="publisher_id"
+                                 referencedTableName="publisher"/>
+    </changeSet>
+
+    <changeSet id="v1-2-2" author="Mike">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="book_author"/>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="book_id"
+                                 baseTableName="book_author"
+                                 constraintName="book_id"
+                                 referencedColumnNames="book_id"
+                                 referencedTableName="book"/>
+    </changeSet>
+
+    <changeSet id="v1-2-3" author="Mike">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="book_author"/>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="author_id"
+                                 baseTableName="book_author"
+                                 constraintName="author_id"
+                                 referencedColumnNames="author_id"
+                                 referencedTableName="author"/>
+    </changeSet>
+
+</databaseChangeLog>

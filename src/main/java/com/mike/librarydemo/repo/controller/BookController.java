@@ -1,4 +1,4 @@
-package com.mike.librarydemo.controller;
+package com.mike.librarydemo.repo.controller;
 
 import com.mike.librarydemo.dto.BookCreateDto;
 import com.mike.librarydemo.dto.BookDto;
